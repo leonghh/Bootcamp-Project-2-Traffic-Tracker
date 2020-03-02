@@ -9,7 +9,7 @@ if (process.env.JAWSDB_URL) {
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "pega!Sus123",
+    password: "10A21e1994",
     database: "traffic_volume_db"
   });
 }
