@@ -12,18 +12,24 @@ function getCoods() {
     })
     .on('end', () => {
       console.log('CSV file successfully processed');
-      
+      console.log(addressArr);
+      var postalCode = 2000;
       for (i = 0; i < addressArr.length; i++) {
-        const queryURL = "https://us1.locationiq.com/v1/search.php?key=e329d0577c126d&street=" + addressArr[i] + "&postalcode=2000&format=json"
-        return axios.get(queryURL)
-          .then(function (response) {
-          console.log(queryURL)
-          console.log(response.data[i].lat)
-          console.log(response.data[i].lon)
-          });
+        (function(i) { 
+          setTimeout(function() {
+            const queryURL = "https://us1.locationiq.com/v1/search.php?key=e329d0577c126d&street=" + addressArr[i] + "&city=sydney&format=json"
+            axios.get(queryURL)
+            .then(function (response) {
+            console.log(addressArr[i])
+            console.log(response.data[0].lat)
+            console.log(response.data[0].lon)
+            }, function(error){
+                console.log(error);
+            });
+            }, 1000*i);
+          })(i);
       }
     });
-
 
   // const queryURL = "https://us1.locationiq.com/v1/search.php?key=e329d0577c126d&street=" + location + "&postalcode=2000&format=json"
   // return axios.get(queryURL)
