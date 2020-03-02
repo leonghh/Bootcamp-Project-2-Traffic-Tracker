@@ -1,8 +1,12 @@
 #map {
   height: 70%;
   width: 80%;
-  position: absolute;
-  left: 10%;
+  top: 5%;
+  left: 2%;
+}
+
+.everything {
+  z-index: 2;
 }
 
 html,
@@ -10,4 +14,5 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-image: linear-gradient(rgb(255, 231, 224), rgb(255, 255, 200));
 }
