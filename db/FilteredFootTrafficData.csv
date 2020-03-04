@@ -1,4 +1,4 @@
-ID,road_name,TotalCount,,
+id,road_name,count,wgs84_latitude,wgs84_longitude
 1,Alfred Street,17385,-33.8395815,151.2112723
 2,Argyle Street,8766,-33.817844,151.0052377
 3,Arundel Street,3552,-33.8313259,151.1678523

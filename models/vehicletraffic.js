@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
-        road_name: {
+        period: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         traffic_count: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
                 len: [1]
