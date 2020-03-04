@@ -1,8 +1,3 @@
-var express = require("express");
-var connection = require("../../../config/connection.js");
-
-var router = express.Router();
-
 function GetDrivingDistance(lat1, lat2, lon1, lon2) {
 	var R = 6371; // km (change this constant to get miles)
 	var dLat = (lat2-lat1) * Math.PI / 180;
@@ -17,20 +12,3 @@ function GetDrivingDistance(lat1, lat2, lon1, lon2) {
 	else if (d<=1) return Math.round(d);
 	return d;
 }
-
-router.get("/", function(req, res) {
-  res.render("index");
-});
-
-// router.get("/api/user", function(req, res) {
-//   console.log(req.body);
-//   var queryString = "SELECT * FROM trafficdata, user";
-//     connection.query(queryString, function(err, result) {
-//       result.forEach((element) => {
-//           let dis = GetDrivingDistance(element.lat, element.wgs84_latitude, element.lon, element.wgs84_longitude);
-//           if (dis <= 5) {console.log(element)}
-//           else {return};
-//       })
-//     });
-// })
-module.exports = router;
