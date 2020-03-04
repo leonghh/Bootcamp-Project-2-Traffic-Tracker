@@ -1,12 +1,26 @@
 #map {
-  height: 70%;
-  width: 80%;
+  height: 100%;
+  width: 100%;
   top: 5%;
   left: 2%;
 }
 
+.parent {
+  height: 70%;
+  width: 80%;
+}
+
 .everything {
-  z-index: 2;
+  height: 100%;
+  width: 100%;
+}
+
+.column {
+  padding: 10px 10px 50px 20px;
+}
+
+.ul .il {
+  border: 1px rgb(50, 50, 83) solid;
 }
 
 html,
@@ -14,5 +28,43 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-image: linear-gradient(rgb(255, 231, 224), rgb(255, 255, 200));
+  background-image: linear-gradient(rgb(124, 132, 175), rgb(200, 213, 255));
+}
+
+button{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;  
+  top: 14px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover{
+  padding-right: 24px;
+  padding-left:8px;
+}
+
+button:hover:after {
+  opacity: 1;
+  right: 10px;
+}
+
+button {
+  font-size: 32px;
+  padding: 16px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.z {
+  z-index: 300;
 }
