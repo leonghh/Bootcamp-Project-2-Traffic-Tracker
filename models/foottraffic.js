@@ -1,5 +1,13 @@
 module.exports = function (sequelize, DataTypes) {
     var FootTraffic = sequelize.define("FootTraffic", {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
         road_name: {
             type: DataTypes.STRING,
             allowNull: false,

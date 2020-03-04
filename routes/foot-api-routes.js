@@ -13,15 +13,17 @@ var db = require("../models");
 module.exports = function(app) {
 
   // GET route for getting all of the FootTraffic
-  app.get("/api/user", function(req, res) {
+  app.get("/api/foottraffic", function(req, res) {
     db.FootTraffic.findAll({
     }).then(function(dbFootTraffic) {
       res.json(dbFootTraffic);
+    }).catch(function(err) {
+      res.json(err);
     });
   });
 
   // Get route for retrieving a single FootTraffic
-  app.get("/api/user/:id", function(req, res) {
+  app.get("/api/foottraffic/:id", function(req, res) {
     // 2. Add a join here to include the Author who wrote the Post
     db.FootTraffic.findOne({
       where: {
@@ -30,7 +32,9 @@ module.exports = function(app) {
     }).then(function(dbFootTraffic) {
       console.log(dbFootTraffic);
       res.json(dbFootTraffic);
-    });
+    }).catch(function(err) {
+        res.json(err);
+      });
   });
 
   // POST route for saving a new post
