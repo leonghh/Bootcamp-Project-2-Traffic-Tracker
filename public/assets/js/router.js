@@ -22,15 +22,15 @@ router.get("/", function(req, res) {
   res.render("index");
 });
 
-router.get("/api/user", function(req, res) {
-  console.log(req.body);
-  var queryString = "SELECT * FROM trafficdata, user";
-    connection.query(queryString, function(err, result) {
-      result.forEach((element) => {
-          let dis = GetDrivingDistance(element.lat, element.wgs84_latitude, element.lon, element.wgs84_longitude);
-          if (dis <= 5) {console.log(element)}
-          else {return};
-      })
-    });
-})
+// router.get("/api/user", function(req, res) {
+//   console.log(req.body);
+//   var queryString = "SELECT * FROM trafficdata, user";
+//     connection.query(queryString, function(err, result) {
+//       result.forEach((element) => {
+//           let dis = GetDrivingDistance(element.lat, element.wgs84_latitude, element.lon, element.wgs84_longitude);
+//           if (dis <= 5) {console.log(element)}
+//           else {return};
+//       })
+//     });
+// })
 module.exports = router;
