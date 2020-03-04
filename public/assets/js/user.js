@@ -16,16 +16,14 @@ function initMap() {
 
 $(document).ready(function () {
 
-    $(document).on("click", "#compare", displayLatLon)
-
+    $(document).on("click", "#submit", displayLatLon)
     function displayLatLon(event) {
-        event.preventDefault();
         console.log(newlat);
         console.log(newlon);
         postUserData(newlat, newlon);
     }
     function postUserData(lat, lon) {
-        // POST route for saving a new user data
+        // User route for saving a new user data
         $.ajax({
             url: '/api/user',
             type: 'POST',
@@ -36,7 +34,8 @@ $(document).ready(function () {
                 lon: lon
             },
             success: function (data) {
-                alert("post success")
+                alert("User success");
+                location.reload();
             }
         })
     };
@@ -44,11 +43,11 @@ $(document).ready(function () {
     /* global moment */
 
     // blogContainer holds all of our posts
-    var userContainer = $(".userinput");
+    var userContainer = $(".userinputtwo");
     // var postCategorySelect = $("#category");
     // Click events for the edit and delete buttons
-    $(document).on("click", "button.delete", handleUserDelete);
-    $(document).on("click", "button.edit", handleUserEdit);
+    // $(document).on("click", "button.delete", handleUserDelete);
+    // $(document).on("click", "button.edit", handleUserEdit);
     // Variable to hold our posts
     var users;
 
@@ -59,8 +58,8 @@ $(document).ready(function () {
 
     // This function grabs posts from the database and updates the view
     function getUsers(user) {
-        $.get("/api/posts", function (data) {
-            console.log("Posts", data);
+        $.get("/api/user", function (data) {
+            console.log("User", data);
             users = data;
             if (!users || !users.length) {
                 displayEmpty();
@@ -82,9 +81,9 @@ $(document).ready(function () {
             });
     }
 
-    // InitializeRows handles appending all of our constructed post HTML inside blogContainer
+    // InitializeRows handles appending all of our constructed User HTML inside blogContainer
     function initializeRows() {
-        blogContainer.empty();
+        userContainer.empty();
         var usersToAdd = [];
         for (var i = 0; i < users.length; i++) {
             usersToAdd.push(createNewRow(users[i]));
@@ -97,7 +96,7 @@ $(document).ready(function () {
         var formattedDate = new Date(user.createdAt);
         formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
         var newUserCard = $("<div>");
-        newUserCard.addClass("card");
+        newUserCard.addClass("card columns");
         var newUserCardHeading = $("<div>");
         newUserCardHeading.addClass("card-header");
         var deleteBtn = $("<button>");
@@ -122,30 +121,30 @@ $(document).ready(function () {
         newUserTitle.text(user.businessType + " ");
         newUserBody.text(user.lat);
         newUserDate.text(formattedDate);
-        newUserTitle.append(newPostDate);
+        newUserTitle.append(newUserDate);
         newUserCardHeading.append(deleteBtn);
         newUserCardHeading.append(editBtn);
-        newUserCardHeading.append(newPostTitle);
-        newUserCardHeading.append(newPostAuthor);
-        newUserCardBody.append(newPostBody);
-        newUserCard.append(newPostCardHeading);
-        newUserCard.append(newPostCardBody);
-        newUserCard.data("post", post);
+        newUserCardHeading.append(newUserTitle);
+        newUserCardHeading.append(newUser);
+        newUserCardBody.append(newUserBody);
+        newUserCard.append(newUserCardHeading);
+        newUserCard.append(newUserCardBody);
+        newUserCard.data("user", user);
         return newUserCard;
     }
 
-    // This function figures out which post we want to delete and then calls deletePost
+    // This function figures out which User we want to delete and then calls deletePost
     function handlePostDelete() {
-        var currentPost = $(this)
+        var currentUser = $(this)
             .parent()
             .parent()
             .data("post");
         deletePost(currentPost.id);
     }
 
-    // This function figures out which post we want to edit and takes it to the appropriate url
+    // This function figures out which User we want to edit and takes it to the appropriate url
     function handlePostEdit() {
-        var currentPost = $(this)
+        var currentUser = $(this)
             .parent()
             .parent()
             .data("post");
@@ -162,9 +161,9 @@ $(document).ready(function () {
         userContainer.empty();
         var messageH2 = $("<h2>");
         messageH2.css({ "text-align": "center", "margin-top": "50px" });
-        messageH2.html("No posts yet" + partial + ", navigate <a href='/cms" + query +
-            "'>here</a> in order to get started.");
-        blogContainer.append(messageH2);
+        // messageH2.html("No posts yet" + partial + ", navigate <a href='/cms" + query +
+        //     "'>here</a> in order to get started.");
+        userContainer.append(messageH2);
     }
 
 });
