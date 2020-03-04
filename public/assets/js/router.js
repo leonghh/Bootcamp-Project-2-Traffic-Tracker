@@ -22,6 +22,10 @@ router.get("/", function(req, res) {
   res.render("index");
 });
 
+router.get("/app", function(req, res) {
+  res.render("map");
+});
+
 router.get("/api/user", function(req, res) {
   console.log(req.body);
   var queryString = "SELECT * FROM trafficdata, user";
