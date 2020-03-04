@@ -12,5 +12,3 @@ function GetDrivingDistance(lat1, lat2, lon1, lon2) {
 	else if (d<=1) return Math.round(d);
 	return d;
 }
-
-module.exports = GetDrivingDistance;
