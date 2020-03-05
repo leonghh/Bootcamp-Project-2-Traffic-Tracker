@@ -1,8 +1,8 @@
 <div class="columns parent">
     <div class="column everything is-four-fifths">
-    <div id="map">
+        <div id="map">
 
-    </div>
+        </div>
     </div>
     <div class="column datatable">
         <br>
@@ -16,38 +16,35 @@
 <div class="columns everything">
     <div class="column">
         <div class="field">
-        <div class="control">
-            <input class="input is-info is-rounded" type="text" placeholder="Business Name" id="businessname">
-        </div>
-        </div>
-    </div>
-    <div class="column">
-        <div class="field" id="typeinput">
-        <div class="control">
-            <div class="select is-primary">
-            <select>
-                <option>Type of Business</option>
-                <option>Cafe</option>
-                <option>Bar</option>
-                <option>Restaurant</option>
-            </select>
+            <div class="control">
+                <input class="input is-info is-rounded" type="text" placeholder="Your Name" id="businessname">
             </div>
         </div>
-        </div>
-    <div class="column"> 
-       <button class="ui button" id="submit">Submit</button>
+        <div class="error"><img src="https://cdn.onlinewebfonts.com/svg/img_515233.png" width="20px"><b>  Error:</b> Please make sure you've clicked on a location, filled in your name and selected a business type.</div>
     </div>
     <div class="column">
-        <div class="columns">
+        <div class="field">
+            <div class="select is-primary" id="typeinput">
+                <select>
+                    <option>Type of Business</option>
+                    <option value="cafe">Cafe</option>
+                    <option value="bar">Bar</option>
+                    <option value="restaurant">Restaurant</option>
+                </select>
+            </div>
+        </div>
+        <div class="column">
+            <button class="ui button" id="submit">Submit</button>
+        </div>
+    </div>
+    <div class="columns">
             <div class="information column">
-                
-            </div>
-        </div>
-    </div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="assets/js/moment.js"></script>
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="/assets/js/user.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmHCHwX_jb1YJboXPPXubJwhXqSJQT3iw&callback=initMap"></script>
 
+            </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="assets/js/moment.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="/assets/js/user.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmHCHwX_jb1YJboXPPXubJwhXqSJQT3iw&callback=initMap"></script>
