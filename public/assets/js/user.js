@@ -218,7 +218,7 @@ $(document).ready(function () {
         var currentUser = $(this)
             .parent()
             .parent()
-            .data("post");
+            .data("user");
         deletePost(currentPost.id);
     }
 
@@ -227,8 +227,8 @@ $(document).ready(function () {
         var currentUser = $(this)
             .parent()
             .parent()
-            .data("post");
-        window.location.href = "/cms?post_id=" + currentPost.id;
+            .data("user");
+        window.location.href = "/cms?user_id=" + currentUser.id;
     }
 
     // This function displays a message when there are no posts
@@ -245,5 +245,4 @@ $(document).ready(function () {
         //     "'>here</a> in order to get started.");
         userContainer.append(messageH2);
     }
-
 });
