@@ -64,7 +64,7 @@ button:hover:after {
 button {
   font-size: 32px;
   padding: 16px;
-  width: 150px;
+  width: 250px;
   transition: all 0.5s;
   cursor: pointer;
 }
@@ -76,3 +76,57 @@ button {
 }
 
 .delete {background-color: rgb(146, 5, 5);}
+
+.hide {
+  display: none;
+}
+
+.show {
+  visibility: visible;
+}
+
+h1 {
+  font-family: "Georgia", "Times New Roman", Times, serif;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 28px;
+}
+
+h3 {
+  font-family: "Georgia", "Times New Roman", Times, serif;
+  color: #333333;
+  margin-left: 10px;
+  text-align: left;
+  padding-top: 20px;
+  /* padding-bottom: 20px; */
+  font-size: 28px;
+}
+
+h5 {
+  font-family: "Georgia", "Times New Roman", Times, serif;
+  color: #ffffff;
+  text-align: left;
+  padding: 10px 20px;
+  /* padding-bottom: 20px; */
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+h6 {
+  font-family: "Georgia", "Times New Roman", Times, serif;
+  color: #ffffff !important;
+  text-align: left;
+  padding: 0px 20px 10px 20px;
+  /* padding-bottom: 20px; */
+  font-size: 16px;
+}
+
+.img-fluid {
+  /* width: 50%; */
+  /* height: 50%; */
+  z-index: 100;
+  /* padding-bottom: 30px; */
+}

@@ -8,6 +8,7 @@ var PORT = process.env.PORT || 8080;
 var db = require("./models")
 
 app.use(express.static("public"));
+app.use(express.static("public/assets/images"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
