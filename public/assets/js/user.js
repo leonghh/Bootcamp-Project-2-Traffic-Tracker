@@ -47,8 +47,8 @@ $(document).ready(function () {
     var userContainer = $(".userinput");
     // var postCategorySelect = $("#category");
     // Click events for the edit and delete buttons
-    $(document).on("click", "button.delete", handleUserDelete);
-    $(document).on("click", "button.edit", handleUserEdit);
+    // $(document).on("click", "button.delete", handleUserDelete);
+    // $(document).on("click", "button.edit", handleUserEdit);
     // Variable to hold our posts
     var users;
 
@@ -59,8 +59,8 @@ $(document).ready(function () {
 
     // This function grabs posts from the database and updates the view
     function getUsers(user) {
-        $.get("/api/posts", function (data) {
-            console.log("Posts", data);
+        $.get("/api/user", function (data) {
+            console.log("User", data);
             users = data;
             if (!users || !users.length) {
                 displayEmpty();
@@ -84,7 +84,7 @@ $(document).ready(function () {
 
     // InitializeRows handles appending all of our constructed post HTML inside blogContainer
     function initializeRows() {
-        blogContainer.empty();
+        userContainer.empty();
         var usersToAdd = [];
         for (var i = 0; i < users.length; i++) {
             usersToAdd.push(createNewRow(users[i]));
@@ -122,15 +122,15 @@ $(document).ready(function () {
         newUserTitle.text(user.businessType + " ");
         newUserBody.text(user.lat);
         newUserDate.text(formattedDate);
-        newUserTitle.append(newPostDate);
+        newUserTitle.append(newUserDate);
         newUserCardHeading.append(deleteBtn);
         newUserCardHeading.append(editBtn);
-        newUserCardHeading.append(newPostTitle);
-        newUserCardHeading.append(newPostAuthor);
-        newUserCardBody.append(newPostBody);
-        newUserCard.append(newPostCardHeading);
-        newUserCard.append(newPostCardBody);
-        newUserCard.data("post", post);
+        newUserCardHeading.append(newUserTitle);
+        newUserCardHeading.append(newUser);
+        newUserCardBody.append(newUserBody);
+        newUserCard.append(newUserCardHeading);
+        newUserCard.append(newUserCardBody);
+        newUserCard.data("user", user);
         return newUserCard;
     }
 
@@ -139,17 +139,17 @@ $(document).ready(function () {
         var currentPost = $(this)
             .parent()
             .parent()
-            .data("post");
+            .data("user");
         deletePost(currentPost.id);
     }
 
     // This function figures out which post we want to edit and takes it to the appropriate url
     function handlePostEdit() {
-        var currentPost = $(this)
+        var currentUser = $(this)
             .parent()
             .parent()
-            .data("post");
-        window.location.href = "/cms?post_id=" + currentPost.id;
+            .data("user");
+        window.location.href = "/cms?user_id=" + currentUser.id;
     }
 
     // This function displays a message when there are no posts
@@ -164,7 +164,6 @@ $(document).ready(function () {
         messageH2.css({ "text-align": "center", "margin-top": "50px" });
         messageH2.html("No posts yet" + partial + ", navigate <a href='/cms" + query +
             "'>here</a> in order to get started.");
-        blogContainer.append(messageH2);
+        userContainer.append(messageH2);
     }
-
 });

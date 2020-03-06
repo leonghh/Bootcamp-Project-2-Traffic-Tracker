@@ -10,4 +10,5 @@ function GetDrivingDistance(lat1, lat2, lon1, lon2) {
     
     if (d>1) return Math.round(d);
 	else if (d<=1) return Math.round(d);
-	return d;
+  return d;
+}
