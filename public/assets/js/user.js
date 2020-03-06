@@ -1,3 +1,7 @@
+var business = "";
+var type ="";
+var whatCompare ="";
+
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -33.865143, lng: 151.209900 },
@@ -7,7 +11,7 @@ function initMap() {
     google.maps.event.addListener(map, "click", function (event) {
         var newMark = new google.maps.Marker({
             position: event.latLng,
-            map: map,
+            map: map
         });
         newlat = event.latLng.lat();
         newlon = event.latLng.lng();
@@ -16,35 +20,87 @@ function initMap() {
 
 $(document).ready(function () {
 
-    $(document).on("click", "#compare", displayLatLon)
+    $(document).on("click", ".compare", function() {
+        var wat = $(this.id);
+        console.log(wat);
+        var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+        var mapOptions = {
+        zoom: 17,
+        center: myLatlng
+        }
+        var icon = {
+            url: "https://i.ya-webdesign.com/images/coffee-cup-clipart-take-away-9.png", // url
+            scaledSize: new google.maps.Size(50, 50), // scaled size
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(0, 0) // anchor
+        };
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            draggable: true,
+            icon: icon,
+            animation: google.maps.Animation.DROP
+        });
 
+        //this stuff just makes the marker bounce in a pretty way when we drop it
+        marker.addListener('click', toggleBounce);
+        
+        function toggleBounce() {
+            if (marker.getAnimation() !== null) {
+              marker.setAnimation(null);
+            } else {
+              marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+          }
+
+          // To add the marker to the map, call setMap();
+        marker.setMap(map);
+    })
+
+    $(document).on("click", "#submit", displayLatLon)
     function displayLatLon(event) {
-        event.preventDefault();
-        console.log(newlat);
-        console.log(newlon);
-        postUserData(newlat, newlon);
+        business = $("#businessname").val().trim();
+        type = $("#typeinput option:selected").val();
+        var string = "Type of Business"
+        if (type === string) {
+            var errorField = $(".error");
+            errorField.css("display", "block");
+            return;
+        }
+        else {
+            if (business !== "" && type !== string && newlat !== "" && newlon !== "") {
+                var errorField = $(".error");
+                errorField.css("display", "none");
+                postUserData(business, type, newlat, newlon);
+            } else {
+                var errorField = $(".error");
+                errorField.css("display", "block");
+            }
+     }
     }
-    function postUserData(lat, lon) {
-        // POST route for saving a new user data
+    function postUserData(business, type, lat, lon) {
+        // User route for saving a new user data
         $.ajax({
             url: '/api/user',
             type: 'POST',
             data: {
-                user: 'Hong Hao',
-                businessType: 'cafe',
+                user: business,
+                businessType: type,
                 lat: lat,
                 lon: lon
             },
             success: function (data) {
-                alert("post success")
+            location.reload();
             }
         })
+        
     };
 
     /* global moment */
 
     // blogContainer holds all of our posts
-    var userContainer = $(".userinput");
+    var userContainer = $(".userinputtwo");
     // var postCategorySelect = $("#category");
     // Click events for the edit and delete buttons
     // $(document).on("click", "button.delete", handleUserDelete);
@@ -82,11 +138,12 @@ $(document).ready(function () {
             });
     }
 
-    // InitializeRows handles appending all of our constructed post HTML inside blogContainer
+    // InitializeRows handles appending all of our constructed User HTML inside blogContainer
     function initializeRows() {
         userContainer.empty();
         var usersToAdd = [];
         for (var i = 0; i < users.length; i++) {
+            whatCompare = i;
             usersToAdd.push(createNewRow(users[i]));
         }
         userContainer.append(usersToAdd);
@@ -97,53 +154,75 @@ $(document).ready(function () {
         var formattedDate = new Date(user.createdAt);
         formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
         var newUserCard = $("<div>");
-        newUserCard.addClass("card");
-        var newUserCardHeading = $("<div>");
-        newUserCardHeading.addClass("card-header");
-        var deleteBtn = $("<button>");
-        deleteBtn.text("x");
-        deleteBtn.addClass("delete btn btn-danger");
-        var editBtn = $("<button>");
-        editBtn.text("EDIT");
-        editBtn.addClass("edit btn btn-info");
-        var newUserTitle = $("<h2>");
-        var newUserDate = $("<small>");
-        var newUser = $("<h5>");
+        newUserCard.addClass("column");
+
+        var outerdropdown = $("<div>");
+        outerdropdown.addClass("dropdown is-hoverable is-right");
+        var dropdownTrigger = $("<div>");
+        dropdownTrigger.addClass("dropdown-trigger");
+        var dropdownTriggerBtn = $("<button>");
+
+        dropdownTriggerBtn.addClass("button");
+
+        dropdownTriggerBtn.attr("aria-haspopup", "true");
+        dropdownTriggerBtn.attr("aria-controls", "dropdown1");
+
+        var dropdownMenu = $("<div>");
+        dropdownMenu.addClass("dropdown-menu");
+        dropdownMenu.attr("id", "dropdown1");
+        dropdownMenu.attr("role", "menu");
+        var dropdownContent = $("<div>");
+        dropdownContent.addClass("dropdown-content");
+        var dropdownItem = $("<div>");
+        dropdownItem.addClass("dropdown-item");
+
+        dropdownTriggerBtn.text(user.user + " " + user.businessType );
+
+        var newType = $("<p>");
+        newType.text(user.businessType + " ");
+        newType.addClass("title is-4");
+        var newUser = $("<p>");
         newUser.text("Written by: " + user.user);
-        newUser.css({
-            float: "right",
-            color: "blue",
-            "margin-top":
-                "-10px"
-        });
-        var newUserCardBody = $("<div>");
-        newUserCardBody.addClass("card-body");
-        var newUserBody = $("<p>");
-        newUserTitle.text(user.businessType + " ");
-        newUserBody.text(user.lat);
-        newUserDate.text(formattedDate);
-        newUserTitle.append(newUserDate);
-        newUserCardHeading.append(deleteBtn);
-        newUserCardHeading.append(editBtn);
-        newUserCardHeading.append(newUserTitle);
-        newUserCardHeading.append(newUser);
-        newUserCardBody.append(newUserBody);
-        newUserCard.append(newUserCardHeading);
-        newUserCard.append(newUserCardBody);
+        newUser.addClass("subtitle is-6");
+
+        var newTime = $("<p>");
+        newTime.text(formattedDate);
+
+        var deleteBtn = $("<button>");
+        deleteBtn.addClass("delete ui button");
+        var editBtn = $("<button>");
+        editBtn.attr("id", whatCompare)
+        editBtn.text("Compare");
+        editBtn.addClass("compare ui button");
+
+        newType.append(deleteBtn);
+        newUserCard.append(newType);
+        newUserCard.append(newUser);
+        newUserCard.append(newTime);
+        newUserCard.append(editBtn);
         newUserCard.data("user", user);
-        return newUserCard;
+        var whereTo = $("#whereto");
+
+        dropdownItem.append(newUserCard);
+        dropdownTrigger.append(dropdownTriggerBtn);
+        dropdownContent.append(dropdownItem);
+        dropdownMenu.append(dropdownContent);
+        outerdropdown.append(dropdownTrigger);
+        outerdropdown.append(dropdownMenu);
+
+        return outerdropdown;
     }
 
-    // This function figures out which post we want to delete and then calls deletePost
+    // This function figures out which User we want to delete and then calls deletePost
     function handlePostDelete() {
-        var currentPost = $(this)
+        var currentUser = $(this)
             .parent()
             .parent()
             .data("user");
         deletePost(currentPost.id);
     }
 
-    // This function figures out which post we want to edit and takes it to the appropriate url
+    // This function figures out which User we want to edit and takes it to the appropriate url
     function handlePostEdit() {
         var currentUser = $(this)
             .parent()
@@ -162,8 +241,8 @@ $(document).ready(function () {
         userContainer.empty();
         var messageH2 = $("<h2>");
         messageH2.css({ "text-align": "center", "margin-top": "50px" });
-        messageH2.html("No posts yet" + partial + ", navigate <a href='/cms" + query +
-            "'>here</a> in order to get started.");
+        // messageH2.html("No posts yet" + partial + ", navigate <a href='/cms" + query +
+        //     "'>here</a> in order to get started.");
         userContainer.append(messageH2);
     }
 });

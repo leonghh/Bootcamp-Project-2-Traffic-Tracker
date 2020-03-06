@@ -1,15 +1,8 @@
 module.exports = function (sequelize, DataTypes) {
-    var VehicleTraffic = sequelize.define("VehicleTraffic", {
-        station_id: {
+    var FootTraffic = sequelize.define("FootTraffic", {
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
-        },
-        suburb: {
-            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 len: [1]
@@ -22,14 +15,7 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
-        period: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
-        },
-        traffic_count: {
+        count: {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
@@ -46,5 +32,5 @@ module.exports = function (sequelize, DataTypes) {
         },
     });
 
-    return VehicleTraffic;
+    return FootTraffic;
 };
