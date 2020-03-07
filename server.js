@@ -22,8 +22,11 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+var routes = require("./routes/html-routes.js");
+
+app.use(routes);
+
 // routes
-require("./routes/html-routes.js")(app);
 require("./routes/user-api-routes.js")(app);
 require("./routes/foot-api-routes.js")(app);
 require("./routes/vehicle-api-routes.js")(app);
