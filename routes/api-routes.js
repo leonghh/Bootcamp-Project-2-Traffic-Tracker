@@ -11,27 +11,24 @@ var db = require("../models");
 
 // Routes
 // =============================================================
-module.exports = function(app) {
+module.exports = function (app) {
 
-  app.get("/", function(req, res) {
+  app.get("/", function (req, res) {
     res.render("index");
   });
 
-  app.get("/app", function(req, res) {
+  app.get("/app", function (req, res) {
     res.render("map");
   });
 
   // POST route for saving a new todo. You can create a todo using the data on req.body
-  app.post("/api/user", function(req, res) {
-    db.User.create(req.body)
-
-      .then(function() {
-        console.log("works")
-        res.end();
-      })
-      .catch(function(err) {
-        res.status(401).json(err)
-      })
+  app.post("/api/user", function (req, res) {
+    db.User.create(req.body).then(function () {
+      console.log("works")
+      res.end();
+    }).catch(function (err) {
+      res.status(401).json(err)
+    })
 
   });
 

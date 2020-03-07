@@ -29,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
         wgs84_longitude: {
             type: DataTypes.DOUBLE,
             allowNull: false,
-        },
+        }
     });
 
     return FootTraffic;
