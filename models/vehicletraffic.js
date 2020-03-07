@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var VehicleTraffic = sequelize.define("VehicleTraffic", {
+    var VehicleTraffic = sequelize.define("VehicleTraffics", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
