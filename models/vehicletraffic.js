@@ -22,6 +22,13 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
+        period: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
         traffic_count: {
             type: DataTypes.INTEGER,
             allowNull: false,
