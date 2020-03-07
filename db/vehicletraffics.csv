@@ -1,4 +1,4 @@
-station_id,suburb,road_name,period,traffic_count,wgs84_latitude,wgs84_longitude,createdAt,updatedAt
+id,suburb,road_name,period,traffic_count,wgs84_latitude,wgs84_longitude,createdAt,updatedAt
 1,Sydney,Sydney Harbour Tunnel,ALL DAYS,89163,-33.860836,151.213791,0000-00-00 00:00:00,0000-00-00 00:00:00
 2,Sydney,Sydney Harbour Tunnel,AM PEAK,24998,-33.860836,151.213791,0000-00-00 00:00:00,0000-00-00 00:00:00
 3,Sydney,Sydney Harbour Tunnel,OFF PEAK,43575,-33.860836,151.213791,0000-00-00 00:00:00,0000-00-00 00:00:00
