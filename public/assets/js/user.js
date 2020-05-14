@@ -30,7 +30,7 @@ $(document).ready(function () {
         // var userIndex = $(this.id);
         var userIndex = $(this).attr('id');
         console.log(userIndex);
-        const inRangeArray = [];
+        var inRangeArray = [];
         $.get("/api/user/" + userIndex, function (data) {
             console.log("user", data);
             userData = data;

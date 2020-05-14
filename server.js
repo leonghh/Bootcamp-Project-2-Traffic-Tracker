@@ -1,7 +1,10 @@
 var express = require("express")
+var compression = require('compression')
 var bodyParser = require('body-parser')
 
 var app = express();
+
+app.use(compression());
 
 var PORT = process.env.PORT || 8080;
 
