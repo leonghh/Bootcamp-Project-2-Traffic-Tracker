@@ -1,0 +1,12 @@
+CREATE TABLE USER
+(
+    id int NOT NULL AUTO_INCREMENT,
+    user VARCHAR(255) NOT NULL,
+    businessType VARCHAR(255) NOT NULL,
+    lat DOUBLE NOT NULL,
+    lon DOUBLE NOT NULL,
+    createdAt TIMESTAMP NOT NULL,
+    updatedAt TIMESTAMP NOT NULL,
+    PRIMARY KEY (id)
+)
+

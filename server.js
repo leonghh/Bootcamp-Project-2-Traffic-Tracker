@@ -1,7 +1,10 @@
 var express = require("express")
+var compression = require('compression')
 var bodyParser = require('body-parser')
 
 var app = express();
+
+app.use(compression());
 
 var PORT = process.env.PORT || 8080;
 
@@ -22,11 +25,8 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-var routes = require("./routes/html-routes.js");
-
-app.use(routes);
-
 // routes
+require("./routes/api-routes.js")(app);
 require("./routes/user-api-routes.js")(app);
 require("./routes/foot-api-routes.js")(app);
 require("./routes/vehicle-api-routes.js")(app);

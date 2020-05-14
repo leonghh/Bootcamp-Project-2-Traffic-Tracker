@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var VehicleTraffic = sequelize.define("VehicleTraffic", {
+    var VehicleTraffic = sequelize.define("VehicleTraffics", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -43,7 +43,7 @@ module.exports = function (sequelize, DataTypes) {
         wgs84_longitude: {
             type: DataTypes.DOUBLE,
             allowNull: false,
-        }
+        },
     });
 
     return VehicleTraffic;
